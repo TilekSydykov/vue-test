@@ -1,12 +1,11 @@
 <template>
-  <div @click="$parent.startGame()">
+  <q-btn @click="$parent.startGame()">
     start
-  </div>
+  </q-btn>
 </template>
 
 <script>
 export default {
   name: "start",
-
 }
 </script>

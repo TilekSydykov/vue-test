@@ -3,5 +3,8 @@ export default function () {
     gameState: 'START',
     categories: [],
     currentQuestion: null,
+    score: 0,
+    lastResult: false,
+    currentTimer: {}
   }
 }

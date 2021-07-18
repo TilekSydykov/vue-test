@@ -1,19 +1,21 @@
 <template>
   <div>
-    Your name: {{ name }}<br>
-    Your score: {{ score }}
+    Your score: {{ score }}<br>
+    Game end => start again?<br>
+    <q-btn @click="$parent.toStart()">
+      to start
+    </q-btn>
   </div>
 </template>
 
 <script>
 export default {
+  name: "end",
   mounted() {
-    this.name = localStorage.getItem("name")
     this.score = this.$store.getters["game/getScore"]
   },
   data(){
     return{
-      name: '',
       score: 0
     }
   }

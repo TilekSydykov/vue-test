@@ -18,7 +18,8 @@
 <script>
 export default {
   mounted(){
-    this.name = window.localStorage.getItem("name")
+    this.name = window.localStorage.getItem("name");
+    console.log(this.name)
   },
   data(){
     return{
@@ -40,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 .blocker{
   position: absolute;
-  z-index: 100000000;
+  z-index: 9999999999;
   height: 100vh;
   width: 100vw;
   background: #ffffff;

@@ -4,6 +4,8 @@
     <GameStartWindow v-if="state === 'START'"/>
     <Question v-if="state === 'QUESTION'"/>
     <Loading v-if="state === 'LOADING'"/>
+    <Result v-if="state === 'RESULT'"/>
+    <End v-if="state === 'END'"/>
   </div>
 </template>
 
@@ -11,7 +13,9 @@
 import Selector from './Selector'
 import GameStartWindow from './GameStartWindow'
 import Question from './Question'
+import Result from './Result'
 import Loading from './Loading'
+import End from './GameEnd'
 
 export default {
   name: "Holder",
@@ -19,7 +23,9 @@ export default {
     Selector,
     GameStartWindow,
     Question,
-    Loading
+    Loading,
+    Result,
+    End
   },
   data() {
     return {
@@ -36,11 +42,25 @@ export default {
      }).then(res => this.initCategories(res.data))
     },
     selectQuestion(catId, value){
-     this.state = "QUESTION";
-     this.saveState();
+      this.loading()
+      this.$api.get("/clues", {
+        params: {
+          value: value,
+          category: catId
+        }
+      }).then(res => {
+        this.$store.commit("game/setQuestion", res.data)
+        this.$store.commit("game/removeQuestionValue", {catId, value})
+        this.state = "QUESTION";
+        this.saveState();
+      })
     },
     saveState(){
       this.$store.commit("game/setState", this.state)
+    },
+    main(){
+      this.state = "PLAYING";
+      this.saveState()
     },
     initCategories(list){
       list.forEach(i => {
@@ -50,12 +70,24 @@ export default {
       this.state = "PLAYING";
       this.saveState();
     },
+    goToResult() {
+      this.state = "RESULT";
+      this.saveState()
+    }
+    ,
     loading(){
       this.state = "LOADING";
+    },
+    end(){
+      this.state = "END";
+      this.saveState();
+    },
+    toStart(){
+      this.state = "START";
+      this.saveState();
     }
   },
   mounted() {
-
     this.state = this.$store.getters["game/someGetter"]
   }
 }
