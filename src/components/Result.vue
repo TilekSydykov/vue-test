@@ -10,7 +10,7 @@
       Score => {{ score }}
     </div>
     <br>
-    <q-btn label="Next" @click="next()" color="primary"/>
+    <q-btn label="OK" @click="next()" color="primary"/>
   </div>
 </template>
 
@@ -19,21 +19,21 @@ export default {
   name: 'result',
   mounted() {
     this.result = this.$store.getters["game/getResult"]
-    this.question= Object.assign({}, this.$store.getters["game/getQuestion"])
+    this.question = Object.assign({}, this.$store.getters["game/getQuestion"][0])
     this.score = this.$store.getters["game/getScore"]
-    if(this.result){
-      this.$store.commit('game/addScore', this.question.value)
-    }
   },
-  data(){
-    return{
+  data() {
+    return {
       result: false,
       score: 0,
       question: {}
     }
   },
-  methods:{
-    next(){
+  methods: {
+    next() {
+      if (this.result) {
+        this.$store.commit('game/addScore', this.question.value)
+      }
       this.$parent.main()
     }
   }

@@ -31,6 +31,7 @@ export default {
     this.tick();
     clearInterval(this.intervalID);
     this.intervalID = setInterval(this.tick, 1000);
+    console.log( "Answer => " + this.question.answer)
   },
   unmounted() {
     clearInterval(this.intervalID)
@@ -58,3 +59,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.form{
+  margin: 0 auto;
+  width: 300px;
+}
+</style>

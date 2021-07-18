@@ -20,8 +20,8 @@ export function setLastResult(store, res){
 }
 
 export function removeQuestionValue(store, p) {
-  console.log((p.value/100) - 1)
-  store.categories.find(r => r.id === p.catId ).values.splice((p.value/100) - 1, 1)
+  let v = store.categories.find(r => r.id === p.catId ).values;
+  v.splice(v.indexOf(p.value), 1)
 }
 
 export function startQuestion(store){

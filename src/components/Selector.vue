@@ -1,20 +1,20 @@
 <template>
-  <div class="q-pa-md">
-    <q-list class="list">
-      <q-item class="item" v-for="(item, index) in game.categories" :key="item.id">
-        <div class="btn-cont">
-          <div class="button question">
-            {{ index + 1 }} - {{ item.title }}
+    <div class="selector">
+      <div class="list">
+        <div  class="item" v-for="(item, index) in game.categories" :key="item.id">
+          <div class="btn-cont">
+            <div class="button question">
+              {{ item.title }}
+            </div>
+          </div>
+          <div class="bnt-cont" v-for="i in 5" :key="i">
+            <div class="button variant" v-if="item.values.includes(i * 100)" @click="questionSelect(index, i * 100)">
+              {{ i * 100 }}
+            </div>
           </div>
         </div>
-        <div class="bnt-cont" v-for="i in 5" :key="i">
-          <div class="button variant" v-if="item.values.includes(i * 100)" @click="questionSelect(index, i * 100)">
-            {{ i * 100 }}
-          </div>
-        </div>
-      </q-item>
-    </q-list>
-  </div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -55,10 +55,17 @@ export default {
 }
 .question {
   width: 200px;
+  background: #31CCEC;
+}
+.item{
+  display: inline-flex;
 }
 .variant{
   cursor: pointer;
 }
-
+.selector{
+  margin: 0 auto;
+  width: auto;
+}
 </style>
 

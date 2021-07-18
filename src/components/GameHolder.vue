@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cont">
     <Selector v-if="state === 'PLAYING'"/>
     <GameStartWindow v-if="state === 'START'"/>
     <Question v-if="state === 'QUESTION'"/>
@@ -37,7 +37,7 @@ export default {
       this.loading();
      this.$api.get("/categories", {
         params: {
-          count: 3
+          count: 10
         }
      }).then(res => this.initCategories(res.data))
     },
@@ -92,3 +92,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.cont{
+  text-align: center;
+}
+</style>
